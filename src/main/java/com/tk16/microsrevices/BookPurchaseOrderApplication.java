@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class MicroserviceOneApplication {
+public class BookPurchaseOrderApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(MicroserviceOneApplication.class, args);
+    SpringApplication.run(BookPurchaseOrderApplication.class, args);
   }
 }
