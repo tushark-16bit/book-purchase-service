@@ -19,9 +19,10 @@ public class KafkaConsumer {
         this.receivePurchaseOrderUseCase = receivePurchaseOrderUseCase;
     }
 
-    @KafkaListener(topics = "topicName", containerFactory = "receivePurchaseOrderCommandConcurrentKafkaListenerContainerFactory")
+    @KafkaListener(topics = "purchase", containerFactory =
+            "receivePurchaseOrderCommandConcurrentKafkaListenerContainerFactory")
     public void listenForCommand(ReceivePurchaseOrderCommand command) {
-        logger.info("Kafka message received: {}", command);
+        logger.info("Kafka message received: {}", command.toString());
         receivePurchaseOrderUseCase.receivePurchaseOrder(command);
     }
 }

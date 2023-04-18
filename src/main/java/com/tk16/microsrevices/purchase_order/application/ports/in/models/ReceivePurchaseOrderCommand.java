@@ -10,21 +10,18 @@ import java.util.UUID;
 
 public class ReceivePurchaseOrderCommand {
 
-    @NotNull
+
     private UUID cartId;
-    @NotNull
-    @Positive
+
     private BigDecimal amount;
-    @NotNull
+
     private UUID userId;
-    @NotNull
-    @Email
+
     private String email;
-    @NotNull
+
     private List<String> itemsBought;
 
-    public ReceivePurchaseOrderCommand(UUID cartId) {
-        this.cartId = cartId;
+    public ReceivePurchaseOrderCommand() {
     }
 
     public ReceivePurchaseOrderCommand(UUID cartId, BigDecimal amount,
@@ -75,5 +72,15 @@ public class ReceivePurchaseOrderCommand {
 
     public void setItemsBought(List<String> itemsBought) {
         this.itemsBought = itemsBought;
+    }
+
+    @Override public String toString() {
+        return "PurchaseOrder{" +
+                "cartId=" + cartId +
+                ", amount=" + amount +
+                ", userId=" + userId +
+                ", email='" + email + '\'' +
+                ", itemsBought=" + itemsBought +
+                '}';
     }
 }

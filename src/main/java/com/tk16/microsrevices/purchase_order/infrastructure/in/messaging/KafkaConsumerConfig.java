@@ -38,7 +38,8 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, ReceivePurchaseOrderCommand> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs(),
                 new StringDeserializer(),
-                new JsonDeserializer<>(ReceivePurchaseOrderCommand.class));
+                new JsonDeserializer<>(ReceivePurchaseOrderCommand.class,
+                        false));
     }
 
     @Bean
