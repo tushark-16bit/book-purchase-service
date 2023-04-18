@@ -1,9 +1,10 @@
-package com.tk16.microsrevices.purchase_order.infrastructure.in.web;
+package com.tk16.microsrevices.purchase_order.infrastructure.in.web.controller;
 
 import com.tk16.microsrevices.purchase_order.application.ports.in.ReadPurchaseOrderUseCase;
 import com.tk16.microsrevices.purchase_order.application.ports.in.models.ReadPurchaseOrderQuery;
 import com.tk16.microsrevices.purchase_order.domain.PurchaseOrder;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/read")
+@PreAuthorize("hasAuthority('OIDC_USER')")
 public class ReadPurchaseOrderController {
 
     private final ReadPurchaseOrderUseCase readPurchaseOrderUseCase;
