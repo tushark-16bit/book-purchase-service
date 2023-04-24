@@ -1,3 +1,2 @@
-# book-purchase-service
 
-Please refer to develop branch for code
+# book-purchase-service

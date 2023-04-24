@@ -1,0 +1,70 @@
+server:
+  port: 8200
+  servlet:
+    context-path: /purchase
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
+
+spring:
+  application:
+    name: books-purchase-order-service
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:purchaseDB
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
+  #limit auto exposed rest endpoints of data jpa to only those with @Repository
+  data:
+    rest:
+      detection-strategy: annotated
+  kafka:
+    bootstrap-servers: localhost:9092
+
+resilience4j:
+  retry:
+    instances:
+      read-cart:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+  ratelimiter:
+    instances:
+      default:
+        limitForPeriod: 2
+        limitRefreshPeriod: 10s
+  bulkhead:
+    instances:
+      default:
+        maxConcurrentCalls: 4
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    org:
+      springframework: info
+
+springdoc:
+  packagesToScan: com.tk16.microsrevices
+  swagger-ui:
+    path: /swagger
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+okta:
+  oauth2:
+    issuer: https://dev-29396893.okta.com/oauth2/default
+    audience: api://default
